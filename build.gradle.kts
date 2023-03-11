@@ -13,6 +13,8 @@ repositories {
 }
 
 dependencies {
+    implementation("org.postgresql:postgresql:42.3.1")
+
     testImplementation(kotlin("test"))
 }
 
