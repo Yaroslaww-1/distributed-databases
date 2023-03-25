@@ -50,15 +50,13 @@ services:
       HZ_CLUSTERNAME: ucu
       HZ_CPSUBSYSTEM_CPMEMBERCOUNT: 3
 
-  ucu_mongo:
-    container_name: ucu_mongo
-    image: mongo
+  ucu_neo4j:
+    container_name: ucu_neo4j
+    image: neo4j
     restart: on-failure
     ports:
-      - 27017:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      - 7474:7474
+      - 7687:7687
 
 volumes:
   ucu-db-data:
