@@ -1,67 +1,80 @@
 version: '3.4'
 
 services:
-  ucu_postgres:
-    container_name: ucu_postgres
-    image: postgres:13.4
+#  ucu_postgres:
+#    container_name: ucu_postgres
+#    image: postgres:13.4
+#    restart: on-failure
+#    ports:
+#      - 7433:5432
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#      PGDATA: /var/lib/postgresql/data
+#    volumes:
+#      - ucu-db-data:/var/lib/postgresql/data
+#
+#  ucu_hazelcast1:
+#    container_name: ucu_hazelcast1
+#    image: hazelcast/hazelcast:5.1.5
+#    restart: on-failure
+#    ports:
+#      - 5701:5701
+#    networks:
+#      - ucu-hazelcast-network
+#    environment:
+#      HZ_CLUSTERNAME: ucu
+#      HZ_CPSUBSYSTEM_CPMEMBERCOUNT: 3
+#
+#  ucu_hazelcast2:
+#    container_name: ucu_hazelcast2
+#    image: hazelcast/hazelcast:5.1.5
+#    restart: on-failure
+#    ports:
+#      - 5702:5701
+#    networks:
+#      - ucu-hazelcast-network
+#    environment:
+#      HZ_CLUSTERNAME: ucu
+#      HZ_CPSUBSYSTEM_CPMEMBERCOUNT: 3
+#
+#  ucu_hazelcast3:
+#    container_name: ucu_hazelcast3
+#    image: hazelcast/hazelcast:5.1.5
+#    restart: on-failure
+#    ports:
+#      - 5703:5701
+#    networks:
+#      - ucu-hazelcast-network
+#    environment:
+#      HZ_CLUSTERNAME: ucu
+#      HZ_CPSUBSYSTEM_CPMEMBERCOUNT: 3
+#
+#  ucu_neo4j:
+#    container_name: ucu_neo4j
+#    image: neo4j
+#    restart: on-failure
+#    ports:
+#      - 7474:7474
+#      - 7687:7687
+
+  ucu_cassandra:
+    container_name: ucu_cassandra
+    image: cassandra
     restart: on-failure
     ports:
-      - 7433:5432
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      PGDATA: /var/lib/postgresql/data
+      - 7000:7000
+      - 7001:7001
+      - 7199:7199
+      - 9042:9042
+      - 9160:9160
     volumes:
-      - ucu-db-data:/var/lib/postgresql/data
+      - ./cassandra.yaml:/etc/cassandra/cassandra.yaml
 
-  ucu_hazelcast1:
-    container_name: ucu_hazelcast1
-    image: hazelcast/hazelcast:5.1.5
-    restart: on-failure
-    ports:
-      - 5701:5701
-    networks:
-      - ucu-hazelcast-network
-    environment:
-      HZ_CLUSTERNAME: ucu
-      HZ_CPSUBSYSTEM_CPMEMBERCOUNT: 3
-
-  ucu_hazelcast2:
-    container_name: ucu_hazelcast2
-    image: hazelcast/hazelcast:5.1.5
-    restart: on-failure
-    ports:
-      - 5702:5701
-    networks:
-      - ucu-hazelcast-network
-    environment:
-      HZ_CLUSTERNAME: ucu
-      HZ_CPSUBSYSTEM_CPMEMBERCOUNT: 3
-
-  ucu_hazelcast3:
-    container_name: ucu_hazelcast3
-    image: hazelcast/hazelcast:5.1.5
-    restart: on-failure
-    ports:
-      - 5703:5701
-    networks:
-      - ucu-hazelcast-network
-    environment:
-      HZ_CLUSTERNAME: ucu
-      HZ_CPSUBSYSTEM_CPMEMBERCOUNT: 3
-
-  ucu_neo4j:
-    container_name: ucu_neo4j
-    image: neo4j
-    restart: on-failure
-    ports:
-      - 7474:7474
-      - 7687:7687
-
-volumes:
-  ucu-db-data:
-    driver: local
-
-networks:
-  ucu-hazelcast-network:
-    driver: bridge
+#volumes:
+#  ucu-db-data:
+#    driver: local
+#
+#networks:
+#  ucu-hazelcast-network:
+#    driver: bridge
